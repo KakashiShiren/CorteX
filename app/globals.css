@@ -1,0 +1,155 @@
+@import "leaflet/dist/leaflet.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 30 24% 97%;
+  --foreground: 28 14% 10%;
+  --card: 30 22% 99%;
+  --border: 28 14% 85%;
+  --muted: 30 16% 93%;
+  --accent: 10 44% 20%;
+  --ring: 35 26% 58%;
+}
+
+.dark {
+  --background: 20 14% 8%;
+  --foreground: 34 22% 93%;
+  --card: 24 14% 11%;
+  --border: 24 10% 19%;
+  --muted: 22 10% 16%;
+  --accent: 28 22% 82%;
+  --ring: 35 24% 60%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(213, 182, 114, 0.12), transparent 18%),
+    radial-gradient(circle at 88% 12%, rgba(63, 95, 85, 0.08), transparent 22%),
+    radial-gradient(circle at 50% 100%, rgba(159, 29, 44, 0.06), transparent 28%),
+    linear-gradient(180deg, rgba(248, 241, 230, 0.94), rgba(244, 237, 226, 0.98));
+  min-height: 100vh;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(213, 182, 114, 0.1), transparent 18%),
+    radial-gradient(circle at 88% 12%, rgba(63, 95, 85, 0.08), transparent 22%),
+    linear-gradient(180deg, rgba(23, 19, 17, 0.98), rgba(14, 12, 11, 1));
+}
+
+a {
+  @apply transition-colors;
+}
+
+::selection {
+  background: rgba(159, 29, 44, 0.18);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .cortex-shell {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .cortex-panel {
+    @apply rounded-[28px] border backdrop-blur-xl;
+    border-color: rgba(108, 20, 32, 0.08);
+    background:
+      linear-gradient(180deg, rgba(255, 250, 245, 0.78), rgba(247, 239, 227, 0.92)),
+      radial-gradient(circle at top left, rgba(213, 182, 114, 0.1), transparent 36%);
+    box-shadow:
+      0 22px 56px rgba(18, 17, 15, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+
+  .dark .cortex-panel {
+    border-color: rgba(213, 182, 114, 0.14);
+    background:
+      linear-gradient(180deg, rgba(24, 19, 17, 0.86), rgba(14, 12, 11, 0.94)),
+      radial-gradient(circle at top left, rgba(213, 182, 114, 0.08), transparent 34%);
+    box-shadow:
+      0 22px 56px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em];
+    color: rgba(108, 20, 32, 0.62);
+  }
+
+  .dark .eyebrow {
+    color: rgba(213, 182, 114, 0.76);
+  }
+
+  .section-title {
+    @apply max-w-3xl text-4xl leading-[1.02] sm:text-5xl;
+  }
+
+  .subtle-grid {
+    background-image:
+      linear-gradient(rgba(18, 17, 15, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(18, 17, 15, 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .dark .subtle-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cortex-divider {
+    border-color: rgba(0, 0, 0, 0.06);
+  }
+
+  .dark .cortex-divider {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .cortex-panel-strong {
+    @apply rounded-[28px] border;
+    border-color: rgba(213, 182, 114, 0.18);
+    background:
+      linear-gradient(180deg, rgba(20, 16, 15, 0.96), rgba(14, 11, 10, 0.98)),
+      radial-gradient(circle at top left, rgba(213, 182, 114, 0.12), transparent 32%);
+    box-shadow:
+      0 22px 56px rgba(18, 17, 15, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .cortex-map-paper {
+    background:
+      linear-gradient(180deg, rgba(250, 244, 235, 0.98), rgba(243, 233, 219, 0.98)),
+      radial-gradient(circle at top left, rgba(213, 182, 114, 0.16), transparent 34%);
+  }
+
+  .dark .cortex-map-paper {
+    background:
+      linear-gradient(180deg, rgba(24, 20, 18, 0.98), rgba(16, 13, 12, 0.98)),
+      radial-gradient(circle at top left, rgba(213, 182, 114, 0.1), transparent 34%);
+  }
+}
