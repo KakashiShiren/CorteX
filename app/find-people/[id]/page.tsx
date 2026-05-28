@@ -40,7 +40,7 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
             <div className="eyebrow">Current Context</div>
             <div className="mt-3 text-2xl">Why this profile is useful right now</div>
             <p className="mt-5 text-sm leading-7 text-black/65 dark:text-white/65">
-              Cortex highlights availability, place, and intent so it is easier to decide whether to connect, message, or meet up on campus.
+              Grove highlights availability, place, and intent so it is easier to decide whether to connect, message, or meet up on campus.
             </p>
           </div>
         </div>

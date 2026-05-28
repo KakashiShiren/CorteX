@@ -79,11 +79,29 @@ export const residences = [
   "Off Campus"
 ];
 
+export const residencesByDomain: Record<string, string[]> = {
+  "clarku.edu": residences,
+  "northeastern.edu": [
+    "International Village",
+    "West Village",
+    "Stetson East",
+    "Stetson West",
+    "Speare Hall",
+    "Off Campus"
+  ],
+  "wpi.edu": ["Morgan Hall", "Daniels Hall", "Riley Hall", "Founders Hall", "East Hall", "Off Campus"],
+  "bu.edu": ["West Campus", "Warren Towers", "Bay State Road", "Student Village", "Kilachand Hall", "Off Campus"]
+};
+
+export function getResidencesForDomain(domain?: string | null) {
+  return residencesByDomain[domain?.toLowerCase() ?? ""] ?? residences;
+}
+
 export const faqItems = [
   {
     question: "How does verification work?",
     answer:
-      "Cortex only allows Clark University email addresses. In production mode, Supabase email verification confirms access before protected features unlock."
+      "Grove only allows Clark University email addresses. In production mode, Supabase email verification confirms access before protected features unlock."
   },
   {
     question: "Can I hide parts of my profile?",
@@ -98,10 +116,14 @@ export const faqItems = [
 ];
 
 export const navItems = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/find-people", label: "Find People" },
-  { href: "/map", label: "Map" },
-  { href: "/ai-chat", label: "AI Chat" },
-  { href: "/messages", label: "Messages" },
-  { href: "/settings", label: "Settings" }
+  { href: "/feed", label: "Feed", icon: "home" },
+  { href: "/dashboard", label: "Dashboard", icon: "dashboard" },
+  { href: "/find-people", label: "People", icon: "people" },
+  { href: "/map", label: "Map", icon: "map" },
+  { href: "/ai-chat", label: "AI", icon: "ai" },
+  { href: "/rides", label: "Rides", icon: "rides" },
+  { href: "/housing", label: "Housing", icon: "housing" },
+  { href: "/marketplace", label: "Market", icon: "marketplace" },
+  { href: "/messages", label: "Messages", icon: "messages" },
+  { href: "/settings", label: "Settings", icon: "settings" }
 ];

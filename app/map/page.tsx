@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { AppShell } from "@/components/app-shell";
-import { CampusMapPage } from "@/components/map/campus-map-page";
+import { MapPageClient } from "@/components/map/map-page-client";
 
 function MapPageFallback() {
   return (
@@ -16,7 +16,7 @@ function MapPageFallback() {
 export default function MapPage() {
   return (
     <Suspense fallback={<MapPageFallback />}>
-      <CampusMapPage />
+      <MapPageClient />
     </Suspense>
   );
 }

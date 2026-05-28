@@ -1189,6 +1189,555 @@ const specialLocationRecords: readonly SeedRecord[] = [
   }
 ] as const;
 
+const campusLifeRecords: readonly SeedRecord[] = [
+  {
+    title: "The Grind at Higgins University Center",
+    content:
+      "The Grind is a popular student hangout space located in the basement of Higgins University Center (HUC). It has a pool table, a Pac-Man arcade machine, and is a go-to spot for students to relax and socialize. Many campus events are also hosted at The Grind. Check the Corq app for upcoming events happening there.",
+    keywords: [
+      "grind",
+      "the grind",
+      "huc",
+      "higgins",
+      "basement",
+      "pool table",
+      "billiards",
+      "pacman",
+      "arcade",
+      "hangout",
+      "chill",
+      "events",
+      "fun",
+      "bored",
+      "things to do",
+      "recreation",
+      "social"
+    ],
+    source: "https://www.clarku.edu/offices/student-engagement/higgins-university-center/",
+    category: "activities"
+  },
+  {
+    title: "Gaming Consoles and Board Games at MACD",
+    content:
+      "Gaming consoles (Xbox and PlayStation) are available on the second floor of the Center for Media Arts, Computing, and Design (MACD) building. Board games are also available on the same floor, stored in cupboards next to the consoles. Students can use these freely during building hours. MACD building access closes at 11PM but students already inside can stay all night.",
+    keywords: [
+      "xbox",
+      "playstation",
+      "console",
+      "gaming",
+      "video games",
+      "board games",
+      "games",
+      "macd",
+      "media arts",
+      "second floor",
+      "floor 2",
+      "fun",
+      "bored",
+      "things to do",
+      "hang out",
+      "recreation"
+    ],
+    source: "https://www.clarku.edu",
+    category: "activities"
+  },
+  {
+    title: "Game Nights and Campus Events",
+    content:
+      "Game nights and social events are regularly hosted across campus at different locations including MACD, The Grind in HUC basement, and the Asher Suite on the 3rd floor of Higgins University Center. To find out what events are happening, check the Corq app which lists all upcoming Clark University student events.",
+    keywords: [
+      "game night",
+      "events",
+      "social",
+      "asher suite",
+      "huc",
+      "macd",
+      "grind",
+      "corq",
+      "corq app",
+      "upcoming events",
+      "things to do",
+      "tonight",
+      "this weekend",
+      "fun",
+      "activities"
+    ],
+    source: "https://www.clarku.edu/offices/student-engagement/",
+    category: "activities"
+  },
+  {
+    title: "Late Night Study Spots on Campus",
+    content:
+      "Best spots for late night studying at Clark: Goddard Library common area is open 24 hours. MACD building closes access at 11PM but students already inside can stay all night to study or work. Dana Commons lounge area is a good option too. Residence hall dorms and lounges are always accessible for residents. The corner room in MACD has a great view and you can hang out there with friends if it is free - no booking needed, just walk in.",
+    keywords: [
+      "study",
+      "late night",
+      "night",
+      "grind",
+      "all night",
+      "24 hours",
+      "library",
+      "macd",
+      "dana commons",
+      "dorm",
+      "lounge",
+      "where to study",
+      "study spot",
+      "focus",
+      "homework",
+      "overnight",
+      "open late"
+    ],
+    source: "https://www.clarku.edu",
+    category: "activities"
+  },
+  {
+    title: "Hidden Spots and Best Views on Campus",
+    content:
+      "Two underrated spots at Clark with great views: Room 402 in Goddard Library has a beautiful view and is a quiet place to study or relax. The corner room in the MACD building also has a beautiful view and is a great spot to chill with friends - available 24 hours if you are already inside, no booking required, just sit in any free study room. Campus Park next to the pond is also a great outdoor chill spot on nice days.",
+    keywords: [
+      "hidden spots",
+      "views",
+      "room 402",
+      "library view",
+      "macd corner room",
+      "corner room",
+      "campus park",
+      "pond",
+      "chill",
+      "relax",
+      "hang out",
+      "quiet",
+      "beautiful",
+      "secret spots",
+      "best spots"
+    ],
+    source: "https://www.clarku.edu",
+    category: "activities"
+  },
+  {
+    title: "Campus Park and Outdoor Chill Spots",
+    content:
+      "Clark University has a campus park where students can relax outdoors on the green grass and next to a pond. It is a great place to chill, read, or hang out with friends on a nice day. The greens and outdoor areas are accessible at all times.",
+    keywords: [
+      "campus park",
+      "park",
+      "pond",
+      "greens",
+      "outdoor",
+      "outside",
+      "chill",
+      "relax",
+      "nature",
+      "grass",
+      "fresh air",
+      "hang out",
+      "sit outside",
+      "sunny day"
+    ],
+    source: "https://www.clarku.edu",
+    category: "activities"
+  },
+  {
+    title: "Hadwen Arboretum",
+    content:
+      "The Hadwen Arboretum is a green nature space associated with Clark University. It is a peaceful outdoor spot great for walks, studying outside, or relaxing in nature. Free to visit and open during daylight hours.",
+    keywords: [
+      "arboretum",
+      "hadwen",
+      "hadwen arboretum",
+      "nature",
+      "park",
+      "walk",
+      "outside",
+      "outdoor",
+      "green",
+      "relax",
+      "peaceful",
+      "fresh air",
+      "study outside"
+    ],
+    source: "https://www.clarku.edu/hadwen-arboretum/",
+    category: "activities"
+  },
+  {
+    title: "Restaurants Near Clark University",
+    content:
+      "There are many restaurants near Clark University on Main Street and Park Ave in Worcester. Here is a Google Maps link showing all restaurants near Clark. Most close around 9 or 10PM. If you are looking for food after 11PM, ask me about late night food options.",
+    keywords: [
+      "restaurants",
+      "food",
+      "eat",
+      "hungry",
+      "where to eat",
+      "near clark",
+      "worcester",
+      "main street",
+      "park ave",
+      "lunch",
+      "dinner",
+      "dining out",
+      "places to eat",
+      "what to eat"
+    ],
+    source:
+      "https://www.google.com/maps/search/restaurants+near+Clark+University+Worcester+MA/@42.260834,-71.8324706,5100m/data=!3m2!1e3!4b1!4m2!2m1!6e5",
+    category: "activities"
+  },
+  {
+    title: "Late Night Food Near Clark - Sunday",
+    content:
+      "Looking for food late at night near Clark on a Sunday after 11PM? Here is a Google Maps link filtered for Sunday night showing what is still open. Your best bets are Ziggy Bomb (open till 1-2AM, near City Hall, great burgers), 7-Eleven near campus, Family Farms on Park Ave, or order delivery via DoorDash or Uber Eats.",
+    keywords: [
+      "late night",
+      "food after 11",
+      "after 11pm",
+      "midnight",
+      "sunday",
+      "open late sunday",
+      "late night sunday",
+      "hungry late",
+      "night food",
+      "ziggy bomb",
+      "7-eleven",
+      "family farms"
+    ],
+    source:
+      "https://www.google.com/maps/search/restaurants+near+Clark+University+Worcester+MA/@42.2608399,-71.8215543,2550m/data=!3m2!1e3!4b1!4m7!2m6!5m4!20m3!2e7!4m1!1i23!6e5",
+    category: "activities"
+  },
+  {
+    title: "Late Night Food Near Clark - Monday",
+    content:
+      "Looking for food late at night near Clark on a Monday after 11PM? Here is a Google Maps link filtered for Monday night showing what is still open. Your best bets are Ziggy Bomb (open till 1-2AM, near City Hall, great burgers), 7-Eleven near campus, Family Farms on Park Ave, or order delivery via DoorDash or Uber Eats.",
+    keywords: [
+      "late night",
+      "food after 11",
+      "after 11pm",
+      "midnight",
+      "monday",
+      "open late monday",
+      "late night monday",
+      "hungry late",
+      "night food",
+      "ziggy bomb",
+      "7-eleven",
+      "family farms"
+    ],
+    source:
+      "https://www.google.com/maps/search/restaurants+near+Clark+University+Worcester+MA/@42.260839,-71.8215543,2550m/data=!3m2!1e3!4b1!4m7!2m6!5m4!20m3!2e1!4m1!1i23!6e5",
+    category: "activities"
+  },
+  {
+    title: "Late Night Food Near Clark - Tuesday",
+    content:
+      "Looking for food late at night near Clark on a Tuesday after 11PM? Here is a Google Maps link filtered for Tuesday night showing what is still open. Your best bets are Ziggy Bomb (open till 1-2AM, near City Hall, great burgers), 7-Eleven near campus, Family Farms on Park Ave, or order delivery via DoorDash or Uber Eats.",
+    keywords: [
+      "late night",
+      "food after 11",
+      "after 11pm",
+      "midnight",
+      "tuesday",
+      "open late tuesday",
+      "late night tuesday",
+      "hungry late",
+      "night food",
+      "ziggy bomb",
+      "7-eleven",
+      "family farms"
+    ],
+    source:
+      "https://www.google.com/maps/search/restaurants+near+Clark+University+Worcester+MA/@42.260838,-71.8215543,2550m/data=!3m2!1e3!4b1!4m7!2m6!5m4!20m3!2e2!4m1!1i23!6e5",
+    category: "activities"
+  },
+  {
+    title: "Late Night Food Near Clark - Wednesday",
+    content:
+      "Looking for food late at night near Clark on a Wednesday after 11PM? Here is a Google Maps link filtered for Wednesday night showing what is still open. Your best bets are Ziggy Bomb (open till 1-2AM, near City Hall, great burgers), 7-Eleven near campus, Family Farms on Park Ave, or order delivery via DoorDash or Uber Eats.",
+    keywords: [
+      "late night",
+      "food after 11",
+      "after 11pm",
+      "midnight",
+      "wednesday",
+      "open late wednesday",
+      "late night wednesday",
+      "hungry late",
+      "night food",
+      "ziggy bomb",
+      "7-eleven",
+      "family farms"
+    ],
+    source:
+      "https://www.google.com/maps/search/restaurants+near+Clark+University+Worcester+MA/@42.260838,-71.8215543,2550m/data=!3m1!1e3!4m7!2m6!5m4!20m3!2e3!4m1!1i23!6e5",
+    category: "activities"
+  },
+  {
+    title: "Late Night Food Near Clark - Thursday",
+    content:
+      "Looking for food late at night near Clark on a Thursday after 11PM? Here is a Google Maps link filtered for Thursday night showing what is still open. Your best bets are Ziggy Bomb (open till 1-2AM, near City Hall, great burgers), 7-Eleven near campus, Family Farms on Park Ave, or order delivery via DoorDash or Uber Eats.",
+    keywords: [
+      "late night",
+      "food after 11",
+      "after 11pm",
+      "midnight",
+      "thursday",
+      "open late thursday",
+      "late night thursday",
+      "hungry late",
+      "night food",
+      "ziggy bomb",
+      "7-eleven",
+      "family farms"
+    ],
+    source:
+      "https://www.google.com/maps/search/restaurants+near+Clark+University+Worcester+MA/@42.2608362,-71.8215543,2550m/data=!3m2!1e3!4b1!4m7!2m6!5m4!20m3!2e4!4m1!1i23!6e5",
+    category: "activities"
+  },
+  {
+    title: "Late Night Food Near Clark - Friday",
+    content:
+      "Looking for food late at night near Clark on a Friday after 11PM? Here is a Google Maps link filtered for Friday night showing what is still open. Your best bets are Ziggy Bomb (open till 1-2AM, near City Hall, great burgers), 7-Eleven near campus, Family Farms on Park Ave, or order delivery via DoorDash or Uber Eats.",
+    keywords: [
+      "late night",
+      "food after 11",
+      "after 11pm",
+      "midnight",
+      "friday",
+      "open late friday",
+      "late night friday",
+      "hungry late",
+      "night food",
+      "ziggy bomb",
+      "7-eleven",
+      "family farms"
+    ],
+    source:
+      "https://www.google.com/maps/search/restaurants+near+Clark+University+Worcester+MA/@42.2608353,-71.8215543,2550m/data=!3m2!1e3!4b1!4m7!2m6!5m4!20m3!2e5!4m1!1i23!6e5",
+    category: "activities"
+  },
+  {
+    title: "Late Night Food Near Clark - Saturday",
+    content:
+      "Looking for food late at night near Clark on a Saturday after 11PM? Here is a Google Maps link filtered for Saturday night showing what is still open. Your best bets are Ziggy Bomb (open till 1-2AM, near City Hall, great burgers), 7-Eleven near campus, Family Farms on Park Ave, or order delivery via DoorDash or Uber Eats.",
+    keywords: [
+      "late night",
+      "food after 11",
+      "after 11pm",
+      "midnight",
+      "saturday",
+      "open late saturday",
+      "late night saturday",
+      "hungry late",
+      "night food",
+      "ziggy bomb",
+      "7-eleven",
+      "family farms"
+    ],
+    source:
+      "https://www.google.com/maps/search/restaurants+near+Clark+University+Worcester+MA/@42.2608344,-71.8215543,2550m/data=!3m2!1e3!4b1!4m7!2m6!5m4!20m3!2e6!4m1!1i23!6e5",
+    category: "activities"
+  },
+  {
+    title: "Convenience Stores Near Clark University",
+    content:
+      "There are convenience stores near Clark University. The closest are 7-Eleven near campus and Family Farms on Park Ave, both open late. Here is a Google Maps link showing convenience stores near campus.",
+    keywords: [
+      "convenience store",
+      "convenience",
+      "store",
+      "snack",
+      "drinks",
+      "groceries",
+      "7 eleven",
+      "7-eleven",
+      "family farms",
+      "park ave",
+      "near campus",
+      "open late",
+      "corner store",
+      "late night store"
+    ],
+    source:
+      "https://www.google.com/maps/search/convenience+store+near+Clark+University+Worcester+MA/@42.2529639,-71.8254135,1257m/data=!3m1!1e3!4m8!2m7!3m5!2sClark+University!3s0x89e38aa31dacf93f:0x55302c069e5d1e52!4m2!1d-71.8245381!2d42.2520353!6e2",
+    category: "activities"
+  },
+  {
+    title: "Vending Machines on Campus",
+    content:
+      "Vending machines are available in multiple areas across Clark University campus including residence halls and various campus buildings. They are accessible at all hours for snacks and drinks.",
+    keywords: [
+      "vending machine",
+      "vending",
+      "snack",
+      "drinks",
+      "food",
+      "late night",
+      "quick food",
+      "hungry",
+      "residence hall",
+      "dorm"
+    ],
+    source: "https://www.clarku.edu/",
+    category: "activities"
+  },
+  {
+    title: "Swimming Pool at Kneller Athletic Center",
+    content:
+      "The Kneller Athletic Center has a swimming pool available for student use. Open swim hours are generally from 10AM to 3PM but check the athletics website for the current schedule as hours may vary. The gym also has basketball courts, fitness equipment, cardio machines, and squash courts.",
+    keywords: [
+      "pool",
+      "swimming",
+      "swim",
+      "kneller",
+      "gym",
+      "open swim",
+      "athletic center",
+      "recreation",
+      "fitness",
+      "sport",
+      "water",
+      "lap swim"
+    ],
+    source: "https://clarkathletics.com/sports/2023/4/5/facilities-Facility-Hours.aspx",
+    category: "activities"
+  },
+  {
+    title: "Basketball Courts on Campus",
+    content:
+      "Basketball courts are available for free student use at both Dolan Field House and Kneller Athletic Center. Students can walk in and use the courts during facility hours.",
+    keywords: [
+      "basketball",
+      "basketball court",
+      "courts",
+      "dolan",
+      "kneller",
+      "sport",
+      "play",
+      "recreation",
+      "free",
+      "pickup basketball",
+      "hoop"
+    ],
+    source: "https://clarkathletics.com/sports/2023/4/5/facilities-Facility-Hours.aspx",
+    category: "activities"
+  },
+  {
+    title: "Badminton on Campus",
+    content:
+      "Students can play badminton inside Dolan Field House or in the squash courts at Kneller Athletic Center. Badminton nets are provided. Ask the helpdesk assistant at Dolan Field House if you need help finding the courts.",
+    keywords: [
+      "badminton",
+      "squash",
+      "squash court",
+      "racket",
+      "sport",
+      "dolan",
+      "kneller",
+      "indoor sport",
+      "recreation",
+      "play",
+      "net"
+    ],
+    source: "https://clarkathletics.com/sports/2023/4/5/facilities-Facility-Hours.aspx",
+    category: "activities"
+  },
+  {
+    title: "Outdoor Sports Fields and Courts",
+    content:
+      "Clark University has several outdoor athletic facilities accessible via Dolan Field House: tennis courts, lacrosse fields, baseball fields, Kilby-Gardner-Hammond Field and Track, and O Brien Softball Field. If you have trouble finding any outdoor court or field, ask the helpdesk assistant at Dolan Field House for directions.",
+    keywords: [
+      "tennis",
+      "tennis court",
+      "lacrosse",
+      "baseball",
+      "softball",
+      "track",
+      "field",
+      "outdoor",
+      "sports field",
+      "kilby",
+      "hammond",
+      "obrien",
+      "dolan",
+      "athletic fields",
+      "run",
+      "running track"
+    ],
+    source: "https://clarkathletics.com/sports/2023/4/5/facilities-Facility-Hours.aspx",
+    category: "activities"
+  },
+  {
+    title: "Things to Do When Bored on Campus",
+    content:
+      "When bored at Clark, here are the best options students actually use - in order: First, head to The Grind in the HUC basement for pool table and Pac-Man. Or go to MACD floor 2 for Xbox, PlayStation, or board games in the cupboards next to the consoles. Second, check the Corq app for game nights or events at the Asher Suite on HUC 3rd floor or at MACD. Third, chill at campus park by the pond, hang out in room 402 of the library for a great view, or the corner room in MACD. Use Cortex Find People to see who is free right now and join them. If you are also hungry, just ask me about food separately.",
+    keywords: [
+      "bored",
+      "things to do",
+      "fun",
+      "activities",
+      "what to do",
+      "campus life",
+      "hang out",
+      "free time",
+      "suggestions",
+      "nothing to do",
+      "entertainment",
+      "recreation",
+      "social",
+      "explore",
+      "bored on campus"
+    ],
+    source: "https://www.clarku.edu/offices/student-engagement/",
+    category: "activities"
+  },
+  {
+    title: "Corq App for Campus Events",
+    content:
+      "The Corq app is the official platform Clark University students use to find out about upcoming campus events including game nights, club meetings, social events, cultural events, and more. Download the Corq app and follow Clark University to stay updated on what is happening on campus.",
+    keywords: [
+      "corq",
+      "corq app",
+      "events",
+      "upcoming events",
+      "campus events",
+      "what is happening",
+      "tonight",
+      "this week",
+      "club",
+      "social events",
+      "activities",
+      "calendar"
+    ],
+    source: "https://www.clarku.edu/offices/student-engagement/",
+    category: "activities"
+  },
+  {
+    title: "Best Study Spots on Campus",
+    content:
+      "Top study spots at Clark: Goddard Library (quiet floors, bookable study rooms, 24 hour common area), MACD building (stay all night if you get in before 11PM, free study rooms no booking needed), Dana Commons lounge area, residence hall lounges, and Room 402 in the library which has a beautiful view. For outdoor studying on nice days, try the campus park by the pond or the Hadwen Arboretum.",
+    keywords: [
+      "study",
+      "study spot",
+      "where to study",
+      "quiet",
+      "focus",
+      "library",
+      "macd",
+      "dana commons",
+      "study room",
+      "homework",
+      "work",
+      "concentrate",
+      "peaceful",
+      "late night study",
+      "grind"
+    ],
+    source: "https://clarku.libcal.com",
+    category: "activities"
+  }
+] as const;
+
 const criticalUrlRecords: readonly SeedRecord[] = [
   {
     title: "Library Study Room Booking",
@@ -1705,6 +2254,9 @@ async function collectRecords() {
   console.log(`[seed] adding ${specialLocationRecords.length} special campus location records`);
   results.push(...specialLocationRecords.map(normalizeRecord));
 
+  console.log(`[seed] adding ${campusLifeRecords.length} student-verified campus life records`);
+  results.push(...campusLifeRecords.map(normalizeRecord));
+
   console.log(`[seed] applying ${criticalUrlRecords.length} URL-backed detail overrides`);
   results.push(...criticalUrlRecords.map(normalizeRecord));
 
@@ -1720,6 +2272,18 @@ function dedupeRecords(records: SeedRecord[]) {
 
   return Array.from(map.values());
 }
+
+const obsoleteCampusLifeTitles = [
+  "Late Night Food Options Near Clark",
+  "Convenience Stores Near Clark",
+  "Restaurants Near Clark University - Sunday",
+  "Restaurants Near Clark University - Monday",
+  "Restaurants Near Clark University - Tuesday",
+  "Restaurants Near Clark University - Wednesday",
+  "Restaurants Near Clark University - Thursday",
+  "Restaurants Near Clark University - Friday",
+  "Restaurants Near Clark University - Saturday"
+] as const;
 
 function chunk<T>(items: readonly T[], size: number) {
   const chunks: T[][] = [];
@@ -1754,6 +2318,26 @@ async function fetchExistingRecordsByTitles(
   }
 
   return existing;
+}
+
+async function deleteRecordsByTitles(
+  supabase: SupabaseServiceClient,
+  titles: readonly string[],
+  label: string
+) {
+  if (!titles.length) {
+    return;
+  }
+
+  console.log(`[seed] removing obsolete ${label} records if present`);
+
+  for (const titleChunk of chunk(Array.from(new Set(titles)), 100)) {
+    const result = await supabase.from("ai_knowledge_base").delete().in("title", titleChunk);
+
+    if (result.error) {
+      throw new Error(formatError(result.error));
+    }
+  }
 }
 
 async function upsertRecordsByTitle(
@@ -1864,6 +2448,65 @@ async function buildAliasUpdateRecords(supabase: SupabaseServiceClient) {
   return buildAliasUpdateRecordsFromExisting(existing);
 }
 
+async function syncEmbeddingsForRecords(
+  supabase: SupabaseServiceClient,
+  records: readonly SeedRecord[]
+) {
+  if (!records.length) {
+    return 0;
+  }
+
+  const { hasGeminiEnv } = await import("../lib/env");
+  if (!hasGeminiEnv) {
+    console.warn("[seed] skipping embedding refresh because GEMINI_API_KEY is missing");
+    return 0;
+  }
+
+  const {
+    createEmbedding,
+    serializeEmbedding
+  } = await import("../lib/knowledge-base-embeddings");
+
+  let processed = 0;
+
+  for (const recordChunk of chunk(records, 25)) {
+    const embeddings = await Promise.all(
+      recordChunk.map((record) => createEmbedding(`${record.title.trim()}\n\n${record.content.trim()}`))
+    );
+
+    for (let index = 0; index < recordChunk.length; index += 1) {
+      const record = recordChunk[index];
+      const updateResult = await supabase
+        .from("ai_knowledge_base")
+        .update({
+          embedding: serializeEmbedding(embeddings[index])
+        })
+        .eq("title", record.title);
+
+      if (updateResult.error) {
+        const message = formatError(updateResult.error);
+        if (
+          /column .*embedding does not exist/i.test(message) ||
+          /could not find the 'embedding' column/i.test(message)
+        ) {
+          console.warn(
+            "[seed] skipping embedding refresh because ai_knowledge_base.embedding does not exist yet. Run supabase/migrations/004_add_ai_knowledge_base_embeddings.sql first."
+          );
+          return processed;
+        }
+
+        throw new Error(message);
+      }
+
+      processed += 1;
+    }
+
+    console.log(`[seed] refreshed embeddings for ${processed}/${records.length} records`);
+  }
+
+  return processed;
+}
+
 async function main() {
   await loadEnvFile(".env.local");
   await loadEnvFile(".env");
@@ -1895,6 +2538,8 @@ async function main() {
     throw new Error("Supabase environment variables are missing. Add them to .env.local before seeding.");
   }
 
+  await deleteRecordsByTitles(supabase, obsoleteCampusLifeTitles, "campus life");
+
   const campusMapRecords = dedupeRecords([
     ...buildingRecords.map(normalizeRecord),
     ...specialLocationRecords.map(normalizeRecord)
@@ -1907,6 +2552,7 @@ async function main() {
   const campusMapStats = await upsertRecordsByTitle(supabase, campusMapRecords, "campus map");
   const aliasRecords = await buildAliasUpdateRecords(supabase);
   const aliasStats = await upsertRecordsByTitle(supabase, aliasRecords, "alias update");
+  const embeddingCount = await syncEmbeddingsForRecords(supabase, Array.from(previewRecordMap.values()));
 
   const totalInserted = nonMapStats.inserted + campusMapStats.inserted + aliasStats.inserted;
   const totalUpdated = nonMapStats.updated + campusMapStats.updated + aliasStats.updated;
@@ -1914,6 +2560,7 @@ async function main() {
   console.log(
     `[seed] finished seeding ai_knowledge_base (${totalInserted} inserted, ${totalUpdated} updated)`
   );
+  console.log(`[seed] refreshed embeddings for ${embeddingCount} knowledge-base records`);
 }
 
 main().catch((error) => {

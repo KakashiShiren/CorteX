@@ -12,6 +12,7 @@ import { UserProfile, UserStatus } from "@/lib/types";
 type CurrentUserResponse = UserProfile & {
   status?: UserStatus | null;
   connectionsCount: number;
+  pendingRequestsCount: number;
 };
 
 export function useAuthSession() {
@@ -43,9 +44,9 @@ export function useAuthSession() {
 
       if (
         (message === "Unauthorized" || message === "Session expired. Please sign in again.") &&
-        pathname !== "/signin"
+        !pathname.startsWith("/auth")
       ) {
-        router.replace(`/signin?redirectTo=${encodeURIComponent(pathname)}`);
+        router.replace(`/auth?redirectTo=${encodeURIComponent(pathname)}`);
       }
     }
   }, [pathname, query.data, query.error, query.isLoading, router, setError, setLoading, setStatus, setUser]);

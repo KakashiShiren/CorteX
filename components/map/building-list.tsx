@@ -27,7 +27,7 @@ export function BuildingList({
         <Input
           value={search}
           onChange={(event) => onSearch(event.target.value)}
-          placeholder="Search Higgins, library, gym..."
+          placeholder="Search buildings, library, gym..."
           className="pl-11"
         />
       </div>

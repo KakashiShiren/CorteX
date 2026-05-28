@@ -33,6 +33,7 @@ export function MapPageClient({ initialQuery = "" }: { initialQuery?: string }) 
   } = useMapStore();
 
   const allBuildings = data?.buildings ?? [];
+  const campusName = data?.universityName ?? "your campus";
   const filteredBuildings = allBuildings.filter((building) => {
     const query = search.trim().toLowerCase();
     if (!query) {
@@ -56,8 +57,8 @@ export function MapPageClient({ initialQuery = "" }: { initialQuery?: string }) 
     <AppShell>
       <div className="space-y-6">
         <div>
-          <div className="eyebrow">Motor Cortex</div>
-          <h1 className="mt-3 text-4xl">Navigate Clark in seconds</h1>
+          <div className="eyebrow">Motor Grove</div>
+          <h1 className="mt-3 text-4xl">Navigate {campusName} in seconds</h1>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-black/60 dark:text-white/60">
             Search a building, view campus details, and calculate a quick walking route from wherever you are.
           </p>
@@ -95,8 +96,8 @@ export function MapPageClient({ initialQuery = "" }: { initialQuery?: string }) 
                 const origin =
                   userLocation ??
                   ({
-                    lat: 42.2512,
-                    lng: -71.8242
+                    lat: allBuildings[0]?.latitude ?? selectedBuilding.latitude,
+                    lng: allBuildings[0]?.longitude ?? selectedBuilding.longitude
                   } as const);
 
                 const response = await apiFetch<{ steps: Array<any>; distance: string; duration: string }>(

@@ -1,5 +1,6 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 
+import { encodeAvatarProfilePicture } from "@/lib/avatar-colors";
 import { demoConnections, demoStatuses, demoUsers } from "@/lib/demo-data";
 import { ActivityType, UserProfile, UserStatus } from "@/lib/types";
 
@@ -28,7 +29,7 @@ function toUserRow(user: UserProfile) {
     year: user.year,
     residence: user.residence,
     bio: user.bio,
-    profile_picture_url: user.profilePictureUrl ?? null,
+    profile_picture_url: user.profilePictureUrl ?? (user.avatarColor ? encodeAvatarProfilePicture(user.avatarColor) : null),
     interests: user.interests,
     is_verified: user.isVerified,
     is_online: user.isOnline,
@@ -55,7 +56,7 @@ function toStudentRow(user: UserProfile) {
     year: user.year,
     residence: user.residence,
     bio: user.bio,
-    profile_picture_url: user.profilePictureUrl ?? null,
+    profile_picture_url: user.profilePictureUrl ?? (user.avatarColor ? encodeAvatarProfilePicture(user.avatarColor) : null),
     interests: user.interests,
     is_verified: user.isVerified,
     is_online: user.isOnline,

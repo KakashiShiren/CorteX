@@ -2,17 +2,20 @@ import { NextRequest } from "next/server";
 
 import { fail, ok, requireUserId } from "@/lib/http";
 import { enforceRateLimit } from "@/lib/rate-limit";
+import { getCurrentUser, listStudents } from "@/lib/repository";
+import {
+  connectionSelect,
+  ConnectionRow,
+  getConnectionPeerId,
+  mapStudentConnectionState,
+  resolveConnectionRow
+} from "@/lib/supabase/connections";
 import { SearchFilters, Student } from "@/lib/types";
 import { mapStudentRow, StudentRow } from "@/lib/supabase/mappers";
 import { getSupabaseServiceClient } from "@/lib/supabase/server";
+import { getCurrentUserUniversityId } from "@/lib/university";
 
 export const dynamic = "force-dynamic";
-
-type ConnectionRow = {
-  from_user_id: string;
-  to_user_id: string;
-  status: "pending" | "accepted" | "rejected";
-};
 
 function sanitizeLikeQuery(value: string) {
   return value.replace(/[%_]/g, "").trim();
@@ -22,6 +25,11 @@ async function listStudentsFromSupabase(filters: SearchFilters, userId: string) 
   const supabase = getSupabaseServiceClient();
   if (!supabase) {
     throw new Error("Supabase is not configured for student search.");
+  }
+
+  const universityId = await getCurrentUserUniversityId(supabase, userId);
+  if (!universityId) {
+    throw new Error("Your campus workspace is still being prepared.");
   }
 
   const page = filters.page ?? 1;
@@ -35,10 +43,11 @@ async function listStudentsFromSupabase(filters: SearchFilters, userId: string) 
     let query = supabase
       .from("students")
       .select(
-        "id, user_id, email, name, major, year, residence, bio, profile_picture_url, interests, is_verified, is_online, current_status, created_at, updated_at",
+        "id, user_id, email, name, university_id, major, year, residence, bio, profile_picture_url, interests, is_verified, is_online, current_status, created_at, updated_at",
         { count: "exact" }
       )
       .eq("is_verified", true)
+      .eq("university_id", universityId)
       .neq("user_id", userId);
 
     if (filters.major) {
@@ -91,29 +100,41 @@ async function listStudentsFromSupabase(filters: SearchFilters, userId: string) 
 
   const studentRows = (studentsQuery.data ?? []) as StudentRow[];
   const studentUserIds = studentRows.map((row) => row.user_id);
-  const connectionStatusMap = new Map<string, Student["connectionStatus"]>();
+  const studentUserIdSet = new Set(studentUserIds);
+  const connectionMap = new Map<string, Pick<Student, "connectionId" | "connectionStatus">>();
 
   if (studentUserIds.length) {
     const connectionsQuery = await supabase
       .from("connections")
-      .select("from_user_id, to_user_id, status")
+      .select(connectionSelect)
       .or(`from_user_id.eq.${userId},to_user_id.eq.${userId}`);
 
     if (connectionsQuery.error) {
       throw connectionsQuery.error;
     }
 
+    const groupedConnections = new Map<string, ConnectionRow[]>();
+
     for (const connection of (connectionsQuery.data ?? []) as ConnectionRow[]) {
-      const peerId = connection.from_user_id === userId ? connection.to_user_id : connection.from_user_id;
-      if (!studentUserIds.includes(peerId)) {
+      const peerId = getConnectionPeerId(userId, connection);
+      if (!studentUserIdSet.has(peerId)) {
         continue;
       }
 
-      connectionStatusMap.set(peerId, connection.status === "accepted" ? "message" : connection.status);
+      groupedConnections.set(peerId, [...(groupedConnections.get(peerId) ?? []), connection]);
+    }
+
+    for (const [peerId, rows] of groupedConnections) {
+      const resolved = resolveConnectionRow(rows);
+      if (!resolved) {
+        continue;
+      }
+
+      connectionMap.set(peerId, mapStudentConnectionState(userId, resolved));
     }
   }
 
-  const mappedStudents = studentRows.map((row) => mapStudentRow(row, connectionStatusMap.get(row.user_id)));
+  const mappedStudents = studentRows.map((row) => mapStudentRow(row, connectionMap.get(row.user_id)));
   const filteredStudents =
     filters.liveStatus === "available"
       ? mappedStudents.filter((student) => Boolean(student.currentStatus))
@@ -152,6 +173,10 @@ export async function GET(request: NextRequest) {
       page: Number(searchParams.get("page") ?? "1"),
       limit: Number(searchParams.get("limit") ?? "12")
     };
+
+    if (getCurrentUser(userId)) {
+      return ok(listStudents(filters, userId));
+    }
 
     return ok(await listStudentsFromSupabase(filters, userId));
   } catch (error) {

@@ -43,7 +43,7 @@ export function SearchBar() {
   };
 
   return (
-    <div className="cortex-panel p-5 sm:p-6">
+    <div className="cortex-panel hover-lift p-5 sm:p-6">
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 lg:flex-row">
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-black/40 dark:text-white/40" />
@@ -54,7 +54,7 @@ export function SearchBar() {
             className="pl-11"
           />
         </div>
-        <Button type="submit">Search Cortex</Button>
+        <Button type="submit">Search Grove</Button>
       </form>
 
       <div className="mt-6 space-y-3">

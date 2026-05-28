@@ -9,7 +9,10 @@ export function useBuildings(category?: string) {
   const suffix = category ? `?category=${category}` : "";
   return useQuery({
     queryKey: ["buildings", category],
-    queryFn: () => apiFetch<{ buildings: Building[] }>(`/api/campus/buildings${suffix}`),
+    queryFn: () =>
+      apiFetch<{ buildings: Building[]; universityName?: string; universityDomain?: string }>(
+        `/api/campus/buildings${suffix}`
+      ),
     staleTime: Infinity
   });
 }

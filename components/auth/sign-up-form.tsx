@@ -8,10 +8,17 @@ import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { apiFetch } from "@/lib/api";
+import { useUniversityDetection } from "@/hooks/use-university-detection";
+import { ApiError, apiFetch } from "@/lib/api";
 import { signUpSchema } from "@/lib/validators";
 
 type SignUpValues = z.infer<typeof signUpSchema>;
+type VerificationResponse = {
+  verificationRequired?: boolean;
+  email?: string;
+  universityName?: string;
+  resendFailed?: boolean;
+};
 
 export function SignUpForm() {
   const router = useRouter();
@@ -31,21 +38,49 @@ export function SignUpForm() {
       clarkId: ""
     }
   });
+  const universityDetection = useUniversityDetection(watch("email"));
 
   const password = watch("password");
+  const detectedUniversityName = universityDetection.visible ? universityDetection.name : undefined;
   const passwordStrength =
     Number(password.length >= 8) + Number(/[A-Z]/.test(password)) + Number(/[0-9]/.test(password));
+
+  const redirectToVerification = (email: string, universityName?: string) => {
+    const params = new URLSearchParams({
+      email: email.toLowerCase()
+    });
+
+    if (universityName) {
+      params.set("universityName", universityName);
+    }
+
+    router.push(`/verify-email?${params.toString()}`);
+  };
 
   const onSubmit = handleSubmit(async (values) => {
     try {
       setServerError(null);
-      await apiFetch("/api/auth/signup", {
+      const result = await apiFetch<VerificationResponse>("/api/auth/signup", {
         method: "POST",
         body: JSON.stringify(values)
       });
-      router.push("/dashboard");
+
+      if (result.verificationRequired) {
+        redirectToVerification(result.email ?? values.email, result.universityName ?? detectedUniversityName);
+        return;
+      }
+
+      router.push("/feed");
       router.refresh();
     } catch (error) {
+      if (error instanceof ApiError) {
+        const details = error.data as VerificationResponse | undefined;
+        if (details?.verificationRequired && !details.resendFailed) {
+          redirectToVerification(details.email ?? values.email, details.universityName ?? detectedUniversityName);
+          return;
+        }
+      }
+
       setServerError(error instanceof Error ? error.message : "Unable to create account");
     }
   });
@@ -54,9 +89,28 @@ export function SignUpForm() {
     <form onSubmit={onSubmit} className="space-y-5">
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-2 sm:col-span-2">
-          <label className="text-sm font-medium">Clark Email</label>
-          <Input placeholder="you@clarku.edu" {...register("email")} />
+          <label className="text-sm font-medium">University Email</label>
+          <Input placeholder="your@university.edu" {...register("email")} />
           {errors.email ? <p className="text-sm text-cortex-ember">{errors.email.message}</p> : null}
+          {!errors.email ? (
+            <p className="text-xs text-black/48 dark:text-white/52">Use your university .edu email address</p>
+          ) : null}
+          {universityDetection.visible ? (
+            <div
+              className="inline-flex items-center rounded-full border px-3 py-1 text-[12px] font-semibold transition-opacity duration-200"
+              style={{
+                backgroundColor: "#E6F4ED",
+                borderColor: "#8FD4AC",
+                color: "#1E5A3A"
+              }}
+            >
+              {universityDetection.loading
+                ? "Checking your university..."
+                : universityDetection.found
+                  ? `🎓 ${universityDetection.name}`
+                  : "🎓 Your university will be created automatically"}
+            </div>
+          ) : null}
         </div>
         <div className="space-y-2">
           <label className="text-sm font-medium">Full Name</label>
@@ -64,7 +118,7 @@ export function SignUpForm() {
           {errors.name ? <p className="text-sm text-cortex-ember">{errors.name.message}</p> : null}
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-medium">Clark ID</label>
+          <label className="text-sm font-medium">Student ID</label>
           <Input placeholder="Optional" {...register("clarkId")} />
         </div>
         <div className="space-y-2">

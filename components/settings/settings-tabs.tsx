@@ -8,6 +8,7 @@ const tabs = [
   { href: "/settings/privacy", label: "Privacy" },
   { href: "/settings/notifications", label: "Notifications" },
   { href: "/settings/appearance", label: "Appearance" },
+  { href: "/settings/canvas", label: "Canvas" },
   { href: "/settings/data", label: "Data" },
   { href: "/settings/help", label: "Help" }
 ];

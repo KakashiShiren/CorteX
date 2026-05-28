@@ -4,28 +4,28 @@ import { Button } from "@/components/ui/button";
 
 export function CTASection() {
   return (
-    <section className="cortex-shell py-24">
-      <div className="cortex-panel overflow-hidden px-8 py-12 sm:px-12 sm:py-16">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-          <div>
-            <div className="eyebrow">Ready To Launch</div>
-            <div className="mt-4 max-w-3xl text-4xl leading-tight sm:text-5xl">
-              Ready to connect your campus with one calmer, smarter surface?
-            </div>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-black/65 dark:text-white/65">
-              Start the MVP, plug in live Clark data, and turn the hackathon prototype into a real student utility platform.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-            <Link href="/signup">
+    <section className="bg-[#1C1A17] px-10 py-20 text-center text-cortex-parchment">
+      <div className="cortex-shell">
+        <div className="mx-auto max-w-3xl">
+          <div className="font-display text-5xl leading-[1.02] sm:text-6xl">Your campus is waiting.</div>
+          <p className="mt-5 text-[16px] leading-7 text-[#d8cbb8]">
+            Join Grove free with your .edu email. No waitlist, no approval, no nonsense.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Link href="/auth">
               <Button size="lg">Get Started Free</Button>
             </Link>
-            <Link href="/signin">
-              <Button size="lg" variant="secondary">
+            <Link href="/auth">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white/18 bg-transparent text-[#f7efe3] hover:bg-white/[0.06]"
+              >
                 Sign In
               </Button>
             </Link>
           </div>
+          <div className="mt-5 text-[11px] text-[#a6947c]">Grove is free for students. Always.</div>
         </div>
       </div>
     </section>

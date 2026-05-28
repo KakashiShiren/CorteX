@@ -12,9 +12,9 @@ export function SearchAndFilterSection({
   onChange: (value: string) => void;
 }) {
   return (
-    <div className="cortex-panel p-5 sm:p-6">
+    <div className="cortex-panel hover-lift p-5 sm:p-6">
       <div className="eyebrow">Find People</div>
-      <div className="mt-3 font-display text-3xl">Search verified Clark students</div>
+      <div className="mt-3 font-display text-4xl leading-none">Search verified students</div>
       <p className="mt-3 max-w-2xl text-sm leading-7 text-black/56 dark:text-white/58">
         Look up classmates by name, major, residence, or live status without digging through noisy cards.
       </p>

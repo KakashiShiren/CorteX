@@ -1,20 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { Avatar } from "@/components/ui/avatar";
-import { useDashboardStore } from "@/stores/dashboard-store";
+import { ConversationSummary } from "@/lib/types";
 
-export function ConversationList({ conversations }: { conversations: Array<any> }) {
+export function ConversationList({ conversations }: { conversations: ConversationSummary[] }) {
   const pathname = usePathname();
   const [search, setSearch] = useState("");
-  const setUnreadCount = useDashboardStore((state) => state.setUnreadCount);
-
-  useEffect(() => {
-    setUnreadCount(conversations.length);
-  }, [conversations.length, setUnreadCount]);
 
   const filtered = useMemo(
     () =>
@@ -25,7 +20,7 @@ export function ConversationList({ conversations }: { conversations: Array<any> 
   );
 
   return (
-    <div className="cortex-panel p-6">
+    <div className="cortex-panel hover-lift p-6">
       <div className="eyebrow">Messages</div>
       <div className="mt-3 text-2xl">Conversations</div>
       <input
@@ -40,14 +35,18 @@ export function ConversationList({ conversations }: { conversations: Array<any> 
             <Link
               key={conversation.id}
               href={`/messages/${conversation.id}`}
-              className={`block rounded-[22px] border p-4 transition ${
+              className={`block rounded-[22px] border p-4 transition-all duration-300 ${
                 pathname === `/messages/${conversation.id}`
                   ? "border-cortex-ember bg-cortex-ember/10"
-                  : "border-black/10 hover:border-cortex-ember/25 dark:border-white/10"
+                  : "border-black/10 hover:-translate-y-0.5 hover:border-cortex-ember/25 hover:bg-white/42 dark:border-white/10 dark:hover:bg-white/[0.04]"
               }`}
             >
               <div className="flex items-center gap-3">
-                <Avatar name={conversation.peer?.name ?? "Clark Student"} />
+                <Avatar
+                  name={conversation.peer?.name ?? "Grove Student"}
+                  imageUrl={conversation.peer?.profilePictureUrl}
+                  avatarColor={conversation.peer?.avatarColor}
+                />
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-sm font-semibold">{conversation.peer?.name}</div>
                   <div className="truncate text-xs text-black/50 dark:text-white/50">

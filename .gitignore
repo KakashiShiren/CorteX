@@ -9,3 +9,9 @@ dist
 coverage
 
 .vercel
+
+*.log
+*.pid
+.recovery_stage*/
+supabase/.temp/
+scripts/__pycache__/

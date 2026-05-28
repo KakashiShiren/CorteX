@@ -1,4 +1,3 @@
-import { demoBuildings } from "@/lib/demo-data";
 import { DirectionStep } from "@/lib/types";
 import { formatDistance, formatDuration } from "@/lib/utils";
 
@@ -42,8 +41,6 @@ export function buildCampusDirections(
   toLat: number,
   toLng: number
 ): DirectionStep[] {
-  const midpointLat = (fromLat + toLat) / 2;
-  const midpointLng = (fromLng + toLng) / 2;
   const distance = haversineDistance(fromLat, fromLng, toLat, toLng);
 
   return [
@@ -54,7 +51,7 @@ export function buildCampusDirections(
     },
     {
       id: "step-2",
-      instruction: `Continue through the campus core toward ${closestBuilding(midpointLat, midpointLng)}.`,
+      instruction: "Continue through the campus core toward your destination.",
       distanceMeters: Math.max(60, distance * 0.42)
     },
     {
@@ -65,13 +62,3 @@ export function buildCampusDirections(
   ];
 }
 
-function closestBuilding(lat: number, lng: number) {
-  const nearest = demoBuildings
-    .map((building) => ({
-      building,
-      distance: haversineDistance(lat, lng, building.latitude, building.longitude)
-    }))
-    .sort((a, b) => a.distance - b.distance)[0];
-
-  return nearest?.building.name ?? "the campus center";
-}

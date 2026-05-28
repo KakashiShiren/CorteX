@@ -14,6 +14,7 @@ import {
   ChatConversation,
   Connection,
   Conversation,
+  ConversationSummary,
   Message,
   SearchFilters,
   Student,
@@ -57,6 +58,39 @@ function getStore(): DemoStore {
     };
   }
 
+  for (const user of demoUsers) {
+    if (!global.__cortexStore.users.some((existing) => existing.id === user.id)) {
+      global.__cortexStore.users.push(structuredClone(user));
+    }
+
+    global.__cortexStore.auth[user.email.toLowerCase()] ??= {
+      userId: user.id,
+      password: "Password123"
+    };
+  }
+
+  for (const status of demoStatuses) {
+    const existingIndex = global.__cortexStore.statuses.findIndex((existing) => existing.id === status.id);
+    const nextStatus = structuredClone(status);
+
+    if (existingIndex >= 0) {
+      global.__cortexStore.statuses[existingIndex] = nextStatus;
+    } else {
+      global.__cortexStore.statuses.push(nextStatus);
+    }
+  }
+
+  for (const connection of demoConnections) {
+    const existingIndex = global.__cortexStore.connections.findIndex((existing) => existing.id === connection.id);
+    const nextConnection = structuredClone(connection);
+
+    if (existingIndex >= 0) {
+      global.__cortexStore.connections[existingIndex] = nextConnection;
+    } else {
+      global.__cortexStore.connections.push(nextConnection);
+    }
+  }
+
   return global.__cortexStore;
 }
 
@@ -74,17 +108,29 @@ function getConnectionState(currentUserId: string, otherUserId: string) {
   );
 
   if (!connection) {
-    return undefined;
+    return {
+      connectionStatus: "none" as const
+    };
   }
 
-  return connection.status === "accepted" ? "message" : connection.status;
+  if (connection.status === "accepted") {
+    return {
+      connectionId: connection.id,
+      connectionStatus: "connected" as const
+    };
+  }
+
+  return {
+    connectionId: connection.id,
+    connectionStatus: connection.fromUserId === currentUserId ? ("outgoing_pending" as const) : ("incoming_pending" as const)
+  };
 }
 
 function toStudent(user: UserProfile, currentUserId?: string): Student {
   return {
     ...user,
     currentStatus: getStatusForUser(user.id),
-    connectionStatus: currentUserId ? getConnectionState(currentUserId, user.id) : undefined
+    ...(currentUserId ? getConnectionState(currentUserId, user.id) : { connectionStatus: "none" as const })
   };
 }
 
@@ -169,7 +215,7 @@ export function registerUser(input: {
     major: "Undeclared",
     year: "Freshman",
     residence: "Off Campus",
-    bio: "New Cortex member.",
+    bio: "New Grove member.",
     interests: [],
     isVerified: true,
     isOnline: true,
@@ -335,14 +381,25 @@ export function respondToConnection(userId: string, connectionId: string, status
   return connection;
 }
 
-export function listConversations(userId: string) {
+export function listConversations(userId: string): ConversationSummary[] {
   return getStore().conversations
     .filter((conversation) => conversation.participantIds.includes(userId))
     .map((conversation) => {
       const peerId = conversation.participantIds.find((id) => id !== userId)!;
+      const peer = getStudentById(peerId, userId);
       return {
         ...conversation,
-        peer: getStudentById(peerId, userId)
+        peer: peer
+          ? {
+              id: peer.id,
+              name: peer.name,
+              major: peer.major,
+              year: peer.year,
+              residence: peer.residence,
+              profilePictureUrl: peer.profilePictureUrl,
+              avatarColor: peer.avatarColor
+            }
+          : undefined
       };
     })
     .sort((a, b) => +new Date(b.lastMessageAt) - +new Date(a.lastMessageAt));

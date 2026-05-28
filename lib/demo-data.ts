@@ -9,7 +9,9 @@ import {
   UserStatus
 } from "@/lib/types";
 
-const now = new Date("2026-04-17T09:30:00.000Z").toISOString();
+const demoNow = new Date();
+const now = demoNow.toISOString();
+const statusExpiresAt = new Date(demoNow.getTime() + 24 * 60 * 60 * 1000).toISOString();
 
 const defaultPrivacy = {
   searchable: true,
@@ -40,13 +42,13 @@ const defaultAppearance = {
 export const demoUsers: UserProfile[] = [
   {
     id: "user-1",
-    email: "maya@clarku.edu",
-    name: "Maya Chen",
+    email: "demo@grove.edu",
+    name: "Avery Morgan",
     major: "Computer Science",
     year: "Junior",
-    residence: "Johnson Hall",
+    residence: "North Quad",
     bio: "Building campus tools, usually with an iced coffee nearby.",
-    interests: ["AI", "Hackathons", "Running"],
+    interests: ["AI", "Campus Projects", "Running"],
     isVerified: true,
     isOnline: true,
     createdAt: now,
@@ -57,11 +59,11 @@ export const demoUsers: UserProfile[] = [
   },
   {
     id: "user-2",
-    email: "jonah@clarku.edu",
+    email: "jonah@stateu.edu",
     name: "Jonah Reyes",
     major: "Economics",
     year: "Senior",
-    residence: "Bullock Hall",
+    residence: "Riverside Hall",
     bio: "Always up for a late-night case study or pickup soccer.",
     interests: ["Finance", "Soccer", "Study Groups"],
     isVerified: true,
@@ -74,11 +76,11 @@ export const demoUsers: UserProfile[] = [
   },
   {
     id: "user-3",
-    email: "layla@clarku.edu",
+    email: "layla@metro.edu",
     name: "Layla Patel",
     major: "Biology",
     year: "Sophomore",
-    residence: "Dana Commons",
+    residence: "Honors Village",
     bio: "Pre-med, community garden volunteer, and library regular.",
     interests: ["Research", "Public Health", "Volunteering"],
     isVerified: true,
@@ -91,7 +93,7 @@ export const demoUsers: UserProfile[] = [
   },
   {
     id: "user-4",
-    email: "omar@clarku.edu",
+    email: "omar@tech.edu",
     name: "Omar Farouk",
     major: "Data Science",
     year: "Graduate",
@@ -108,11 +110,11 @@ export const demoUsers: UserProfile[] = [
   },
   {
     id: "user-5",
-    email: "sophia@clarku.edu",
+    email: "sophia@coast.edu",
     name: "Sophia Williams",
     major: "Psychology",
     year: "Freshman",
-    residence: "Blackstone Hall",
+    residence: "Maple Hall",
     bio: "New to campus and collecting all the good study spots.",
     interests: ["Peer Mentoring", "Music", "Coffee Chats"],
     isVerified: true,
@@ -125,11 +127,11 @@ export const demoUsers: UserProfile[] = [
   },
   {
     id: "user-6",
-    email: "nina.romero@clarku.edu",
+    email: "nina.romero@arts.edu",
     name: "Nina Romero",
     major: "Political Science",
     year: "Senior",
-    residence: "Maywood Street",
+    residence: "Campus Apartments",
     bio: "Debate team, policy nerd, and usually halfway through a cold brew.",
     interests: ["Debate", "Public Policy", "Writing"],
     isVerified: true,
@@ -142,11 +144,11 @@ export const demoUsers: UserProfile[] = [
   },
   {
     id: "user-7",
-    email: "ethan.park@clarku.edu",
+    email: "ethan.park@design.edu",
     name: "Ethan Park",
     major: "Interactive Media",
     year: "Junior",
-    residence: "Johnson Hall",
+    residence: "Innovation House",
     bio: "Designing game interfaces and always looking for collaborators.",
     interests: ["Game Design", "UI", "Animation"],
     isVerified: true,
@@ -159,7 +161,7 @@ export const demoUsers: UserProfile[] = [
   },
   {
     id: "user-8",
-    email: "fatima.ali@clarku.edu",
+    email: "fatima.ali@business.edu",
     name: "Fatima Ali",
     major: "Business Management",
     year: "Graduate",
@@ -176,11 +178,11 @@ export const demoUsers: UserProfile[] = [
   },
   {
     id: "user-9",
-    email: "liam.donovan@clarku.edu",
+    email: "liam.donovan@stateu.edu",
     name: "Liam Donovan",
     major: "Data Science",
     year: "Sophomore",
-    residence: "Bullock Hall",
+    residence: "Riverside Hall",
     bio: "Usually toggling between stats homework, pickup basketball, and dining hall runs.",
     interests: ["Basketball", "Analytics", "Study Groups"],
     isVerified: true,
@@ -203,7 +205,7 @@ export const demoStatuses: UserStatus[] = [
     customText: "Grinding through systems homework.",
     isVisible: true,
     createdAt: now,
-    expiresAt: new Date("2026-04-18T09:30:00.000Z").toISOString()
+    expiresAt: statusExpiresAt
   },
   {
     id: "status-2",
@@ -214,7 +216,7 @@ export const demoStatuses: UserStatus[] = [
     customText: "Quick lift before class.",
     isVisible: true,
     createdAt: now,
-    expiresAt: new Date("2026-04-18T09:30:00.000Z").toISOString()
+    expiresAt: statusExpiresAt
   },
   {
     id: "status-3",
@@ -225,29 +227,29 @@ export const demoStatuses: UserStatus[] = [
     customText: "Need anatomy flashcards.",
     isVisible: true,
     createdAt: now,
-    expiresAt: new Date("2026-04-18T09:30:00.000Z").toISOString()
+    expiresAt: statusExpiresAt
   },
   {
     id: "status-4",
     userId: "user-6",
     activity: "in_class",
     emoji: "🎓",
-    location: "Jonas Clark Hall",
+    location: "Seminar Hall",
     customText: "In seminar until 3 PM.",
     isVisible: true,
     createdAt: now,
-    expiresAt: new Date("2026-04-18T09:30:00.000Z").toISOString()
+    expiresAt: statusExpiresAt
   },
   {
     id: "status-5",
     userId: "user-7",
     activity: "eating",
     emoji: "🍽️",
-    location: "The Table at Higgins",
+    location: "Student Center",
     customText: "Sketchbook open if you want to talk UI.",
     isVisible: true,
     createdAt: now,
-    expiresAt: new Date("2026-04-18T09:30:00.000Z").toISOString()
+    expiresAt: statusExpiresAt
   },
   {
     id: "status-6",
@@ -258,18 +260,18 @@ export const demoStatuses: UserStatus[] = [
     customText: "On Zoom for a consulting call.",
     isVisible: true,
     createdAt: now,
-    expiresAt: new Date("2026-04-18T09:30:00.000Z").toISOString()
+    expiresAt: statusExpiresAt
   },
   {
     id: "status-7",
     userId: "user-9",
     activity: "idle",
     emoji: "☕",
-    location: "Higgins University Center",
+    location: "Campus Cafe",
     customText: "Free for a stats study group later.",
     isVisible: true,
     createdAt: now,
-    expiresAt: new Date("2026-04-18T09:30:00.000Z").toISOString()
+    expiresAt: statusExpiresAt
   }
 ];
 
@@ -298,6 +300,30 @@ export const demoConnections: Connection[] = [
   },
   {
     id: "connection-2",
+    fromUserId: "user-1",
+    toUserId: "user-3",
+    status: "accepted",
+    createdAt: now,
+    respondedAt: now
+  },
+  {
+    id: "connection-3",
+    fromUserId: "user-1",
+    toUserId: "user-6",
+    status: "accepted",
+    createdAt: now,
+    respondedAt: now
+  },
+  {
+    id: "connection-4",
+    fromUserId: "user-7",
+    toUserId: "user-1",
+    status: "accepted",
+    createdAt: now,
+    respondedAt: now
+  },
+  {
+    id: "connection-5",
     fromUserId: "user-5",
     toUserId: "user-1",
     status: "pending",

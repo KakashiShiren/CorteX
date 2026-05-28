@@ -5,7 +5,13 @@ import { useEffect, useRef } from "react";
 import { ChatMessage } from "@/components/chat/chat-message";
 import { ChatMessage as ChatMessageType } from "@/lib/types";
 
-export function ChatContainer({ messages }: { messages: ChatMessageType[] }) {
+export function ChatContainer({
+  messages,
+  universityName = "your campus"
+}: {
+  messages: ChatMessageType[];
+  universityName?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -22,7 +28,7 @@ export function ChatContainer({ messages }: { messages: ChatMessageType[] }) {
       ) : (
         <div className="flex h-full items-center justify-center text-center">
           <div>
-            <div className="text-2xl font-semibold">Ask anything about Clark</div>
+            <div className="text-2xl font-semibold">Ask anything about {universityName}</div>
             <p className="mt-3 max-w-md text-sm leading-7 text-black/56 dark:text-white/58">
               Library hours, dining details, facility access, campus contacts, and study logistics all work well here.
             </p>

@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     if (!supabase) {
       console.error("[status] Missing Supabase service configuration.", {
         hasUrl: Boolean(env.supabaseUrl),
-        hasServiceKey: Boolean(env.supabaseServiceKey)
+        hasServiceKey: Boolean(env.supabaseServiceRoleKey)
       });
       return fail("Supabase is not configured for status updates.", 500);
     }
@@ -98,7 +98,7 @@ export async function DELETE() {
     if (!supabase) {
       console.error("[status] Missing Supabase service configuration for delete.", {
         hasUrl: Boolean(env.supabaseUrl),
-        hasServiceKey: Boolean(env.supabaseServiceKey)
+        hasServiceKey: Boolean(env.supabaseServiceRoleKey)
       });
       return fail("Supabase is not configured for status updates.", 500);
     }

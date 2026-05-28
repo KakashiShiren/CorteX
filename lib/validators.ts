@@ -1,13 +1,21 @@
 import { z } from "zod";
 import { statusDurationValues } from "@/lib/constants";
+import { TEST_ACCOUNT_PASSWORD, usesFixedTestAccountPassword } from "@/lib/test-accounts";
+import { isAllowedUniversityEmail, UNIVERSITY_EMAIL_ERROR } from "@/lib/university";
 
 const statusDurationSet = new Set<number>(statusDurationValues);
+const universityEmailSchema = z
+  .string()
+  .trim()
+  .email("Enter a valid email address")
+  .transform((value) => value.toLowerCase())
+  .refine((value) => isAllowedUniversityEmail(value), {
+    message: UNIVERSITY_EMAIL_ERROR
+  });
 
 export const signUpSchema = z
   .object({
-    email: z.string().email().refine((value) => value.endsWith("@clarku.edu"), {
-      message: "Use your @clarku.edu email"
-    }),
+    email: universityEmailSchema,
     name: z.string().min(2, "Name is required"),
     password: z
       .string()
@@ -17,15 +25,26 @@ export const signUpSchema = z
     confirmPassword: z.string(),
     clarkId: z.string().optional()
   })
+  .refine(
+    (data) => !usesFixedTestAccountPassword(data.email) || data.password === TEST_ACCOUNT_PASSWORD,
+    {
+      message: `Test accounts must use ${TEST_ACCOUNT_PASSWORD}`,
+      path: ["password"]
+    }
+  )
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords must match",
     path: ["confirmPassword"]
   });
 
 export const signInSchema = z.object({
-  email: z.string().email(),
+  email: universityEmailSchema,
   password: z.string().min(8),
   rememberMe: z.boolean().default(true)
+});
+
+export const emailVerificationSchema = z.object({
+  email: universityEmailSchema
 });
 
 export const profileSchema = z.object({

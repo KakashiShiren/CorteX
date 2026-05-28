@@ -72,3 +72,29 @@ export async function GET() {
     );
   }
 }
+
+export async function DELETE() {
+  try {
+    const userId = requireUserId();
+    const supabase = getSupabaseServiceClient();
+
+    if (!supabase) {
+      return fail("Supabase is not configured for AI conversations.", 500);
+    }
+
+    const query = await supabase.from("chat_conversations").delete().eq("user_id", userId);
+
+    if (query.error) {
+      return fail(query.error.message, 500);
+    }
+
+    return ok({ success: true });
+  } catch (error) {
+    return fail(
+      error instanceof Error && error.message === "UNAUTHORIZED"
+        ? "Unauthorized"
+        : "Unable to clear AI conversations",
+      error instanceof Error && error.message === "UNAUTHORIZED" ? 401 : 400
+    );
+  }
+}

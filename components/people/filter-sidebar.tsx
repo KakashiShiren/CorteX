@@ -1,6 +1,7 @@
 "use client";
 
-import { classYears, majors, residences } from "@/lib/constants";
+import { classYears, getResidencesForDomain, majors } from "@/lib/constants";
+import { useAuthSession } from "@/hooks/use-auth-session";
 
 type Filters = {
   q: string;
@@ -19,8 +20,11 @@ export function FilterSidebar({
   onChange: (filters: Filters) => void;
   onClear: () => void;
 }) {
+  const { data: session } = useAuthSession();
+  const residences = getResidencesForDomain(session?.universityDomain);
+
   return (
-    <div className="cortex-panel p-6">
+    <div className="cortex-panel hover-lift p-6">
       <div className="flex items-center justify-between gap-4">
         <div>
           <div className="eyebrow">Filters</div>
@@ -52,10 +56,10 @@ export function FilterSidebar({
                     liveStatus: filters.liveStatus === option.value ? "" : option.value
                   })
                 }
-                className={`rounded-full px-3 py-2 text-sm ${
+                className={`filter-pill ${
                   filters.liveStatus === option.value
-                    ? "bg-cortex-ink text-white dark:bg-white dark:text-cortex-ink"
-                    : "bg-black/[0.035] text-black/64 dark:bg-white/[0.06] dark:text-white/68"
+                    ? "filter-pill-active"
+                    : "filter-pill-idle"
                 }`}
               >
                 {option.label}
@@ -72,10 +76,10 @@ export function FilterSidebar({
                 key={major}
                 type="button"
                 onClick={() => onChange({ ...filters, major: filters.major === major ? "" : major })}
-                className={`rounded-full px-3 py-2 text-sm ${
+                className={`filter-pill ${
                   filters.major === major
-                    ? "bg-cortex-ink text-white dark:bg-white dark:text-cortex-ink"
-                    : "bg-black/[0.035] text-black/64 dark:bg-white/[0.06] dark:text-white/68"
+                    ? "filter-pill-active"
+                    : "filter-pill-idle"
                 }`}
               >
                 {major}
@@ -92,10 +96,10 @@ export function FilterSidebar({
                 key={year}
                 type="button"
                 onClick={() => onChange({ ...filters, year: filters.year === year ? "" : year })}
-                className={`rounded-full px-3 py-2 text-sm ${
+                className={`filter-pill ${
                   filters.year === year
-                    ? "bg-cortex-ink text-white dark:bg-white dark:text-cortex-ink"
-                    : "bg-black/[0.035] text-black/64 dark:bg-white/[0.06] dark:text-white/68"
+                    ? "filter-pill-active"
+                    : "filter-pill-idle"
                 }`}
               >
                 {year}
@@ -117,10 +121,10 @@ export function FilterSidebar({
                     residence: filters.residence === residence ? "" : residence
                   })
                 }
-                className={`rounded-full px-3 py-2 text-sm ${
+                className={`filter-pill ${
                   filters.residence === residence
-                    ? "bg-cortex-ink text-white dark:bg-white dark:text-cortex-ink"
-                    : "bg-black/[0.035] text-black/64 dark:bg-white/[0.06] dark:text-white/68"
+                    ? "filter-pill-active"
+                    : "filter-pill-idle"
                 }`}
               >
                 {residence}

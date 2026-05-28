@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { useStatusStore } from "@/stores/status-store";
+import { useAuthSession } from "@/hooks/use-auth-session";
 import { Button } from "@/components/ui/button";
 import { UpdateStatusModal } from "@/components/dashboard/update-status-modal";
 
@@ -37,17 +38,18 @@ function formatStatusExpiry(expiresAt: string) {
 
 export function StatusDisplay() {
   const status = useStatusStore((state) => state.currentStatus);
+  const { data: session } = useAuthSession();
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <div className="cortex-panel p-6">
+      <div className="cortex-panel hover-lift p-6">
         <div className="eyebrow">Status</div>
         {status ? (
           <>
             <div className="mt-4 flex items-center gap-3 text-2xl font-semibold">
               <span>{status.emoji}</span>
-              <span>{status.location ? `${status.location}` : "Visible to Clark"}</span>
+              <span>{status.location ? `${status.location}` : `Visible to ${session?.universityName ?? "your campus"}`}</span>
             </div>
             <p className="mt-3 text-sm leading-7 text-black/56 dark:text-white/58">
               {status.customText || "Your current activity is visible to verified students right now."}

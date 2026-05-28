@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getSessionUserId } from "@/lib/auth";
+import { getSession } from "@/lib/auth";
 
 export function ok<T>(data: T, init?: ResponseInit) {
   return NextResponse.json(
@@ -12,11 +12,12 @@ export function ok<T>(data: T, init?: ResponseInit) {
   );
 }
 
-export function fail(error: string, status = 400) {
+export function fail<T>(error: string, status = 400, data?: T) {
   return NextResponse.json(
     {
       success: false,
-      error
+      error,
+      ...(data === undefined ? {} : { data })
     },
     {
       status
@@ -25,10 +26,10 @@ export function fail(error: string, status = 400) {
 }
 
 export function requireUserId() {
-  const userId = getSessionUserId();
-  if (!userId) {
+  const session = getSession();
+  if (!session || !session.isVerified) {
     throw new Error("UNAUTHORIZED");
   }
 
-  return userId;
+  return session.userId;
 }

@@ -77,7 +77,7 @@ export function CampusMapPage() {
             <div className="eyebrow">Campus Map</div>
             <h1 className="mt-3 text-4xl">Find buildings, routes, and first-day essentials</h1>
             <p className="mt-3 max-w-3xl text-sm leading-7 text-black/56 dark:text-white/58">
-              Search Clark buildings, filter by category, and jump straight to directions. The campus map now runs
+              Search campus buildings, filter by category, and jump straight to directions. The campus map now runs
               entirely on Leaflet and OpenStreetMap, so it stays interactive without depending on any external API
               key setup.
             </p>
@@ -94,7 +94,7 @@ export function CampusMapPage() {
               <Input
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Search Higgins, library, gym..."
+                placeholder="Search buildings, library, gym..."
                 className="mt-4"
               />
             </div>
@@ -202,7 +202,7 @@ export function CampusMapPage() {
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <div className="eyebrow">Live Map</div>
-                  <div className="mt-2 font-display text-3xl">Clark campus explorer</div>
+                  <div className="mt-2 font-display text-3xl">Campus explorer</div>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {categories.map((category) => (

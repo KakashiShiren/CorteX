@@ -32,8 +32,9 @@ export function CampusMapClient({
   userLocation: { lat: number; lng: number } | null;
   onSelect: (building: Building) => void;
 }) {
-  const focusLat = selectedBuilding?.latitude ?? userLocation?.lat ?? 42.2512;
-  const focusLng = selectedBuilding?.longitude ?? userLocation?.lng ?? -71.8242;
+  const fallbackBuilding = buildings[0];
+  const focusLat = selectedBuilding?.latitude ?? userLocation?.lat ?? fallbackBuilding?.latitude ?? 42.3398;
+  const focusLng = selectedBuilding?.longitude ?? userLocation?.lng ?? fallbackBuilding?.longitude ?? -71.0892;
 
   return (
     <div className="h-[520px] overflow-hidden rounded-[28px] border border-black/10 dark:border-white/10">

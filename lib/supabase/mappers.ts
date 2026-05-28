@@ -1,9 +1,13 @@
 import { Student, UserProfile, UserStatus } from "@/lib/types";
+import { parseAvatarProfilePicture } from "@/lib/avatar-colors";
 
 export type UserRow = {
   id: string;
   email: string;
   name: string;
+  university_id: string | null;
+  university_name?: string | null;
+  university_domain?: string | null;
   major: string | null;
   year: string | null;
   residence: string | null;
@@ -29,6 +33,9 @@ export type StudentRow = {
   user_id: string;
   email: string;
   name: string;
+  university_id: string | null;
+  university_name?: string | null;
+  university_domain?: string | null;
   major: string | null;
   year: string | null;
   residence: string | null;
@@ -74,7 +81,7 @@ function getDefaultProfileFields() {
     major: "Undeclared",
     year: "Freshman",
     residence: "Off Campus",
-    bio: "New to Cortex.",
+    bio: "New to Grove.",
     interests: [] as string[]
   };
 }
@@ -173,16 +180,21 @@ export function normalizeCurrentStatus(value: unknown): UserStatus | undefined {
 
 export function mapUserRow(row: UserRow): UserProfile {
   const defaults = getDefaultProfileFields();
+  const avatar = parseAvatarProfilePicture(row.profile_picture_url);
 
   return {
     id: row.id,
     email: row.email,
     name: row.name,
+    universityId: row.university_id ?? undefined,
+    universityName: row.university_name ?? undefined,
+    universityDomain: row.university_domain ?? undefined,
     major: row.major ?? defaults.major,
     year: row.year ?? defaults.year,
     residence: row.residence ?? defaults.residence,
     bio: row.bio ?? defaults.bio,
-    profilePictureUrl: row.profile_picture_url ?? undefined,
+    profilePictureUrl: avatar.profilePictureUrl,
+    avatarColor: avatar.avatarColor,
     interests: row.interests ?? defaults.interests,
     isVerified: row.is_verified,
     isOnline: row.is_online,
@@ -205,19 +217,24 @@ export function mapUserRow(row: UserRow): UserProfile {
 
 export function mapStudentRow(
   row: StudentRow,
-  connectionStatus?: Student["connectionStatus"]
+  connection?: Pick<Student, "connectionId" | "connectionStatus">
 ): Student {
   const defaults = getDefaultProfileFields();
+  const avatar = parseAvatarProfilePicture(row.profile_picture_url);
 
   return {
     id: row.user_id,
     email: row.email,
     name: row.name,
+    universityId: row.university_id ?? undefined,
+    universityName: row.university_name ?? undefined,
+    universityDomain: row.university_domain ?? undefined,
     major: row.major ?? defaults.major,
     year: row.year ?? defaults.year,
     residence: row.residence ?? defaults.residence,
     bio: row.bio ?? defaults.bio,
-    profilePictureUrl: row.profile_picture_url ?? undefined,
+    profilePictureUrl: avatar.profilePictureUrl,
+    avatarColor: avatar.avatarColor,
     interests: row.interests ?? defaults.interests,
     isVerified: row.is_verified,
     isOnline: row.is_online,
@@ -236,6 +253,7 @@ export function mapStudentRow(
     notifications: defaultNotifications,
     appearance: defaultAppearance,
     currentStatus: normalizeCurrentStatus(row.current_status),
-    connectionStatus
+    connectionId: connection?.connectionId,
+    connectionStatus: connection?.connectionStatus ?? "none"
   };
 }

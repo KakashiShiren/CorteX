@@ -1,4 +1,5 @@
 import { AppShell } from "@/components/app-shell";
+import { AssignmentsWidget } from "@/components/canvas/assignments-widget";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { QuickActionsGrid } from "@/components/dashboard/quick-actions-grid";
 import { QuickTips } from "@/components/dashboard/quick-tips";
@@ -15,6 +16,7 @@ export default function DashboardPage() {
         <QuickActionsGrid />
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_minmax(320px,0.8fr)]">
           <div className="space-y-6">
+            <AssignmentsWidget />
             <RecentSearches />
             <QuickTips />
           </div>

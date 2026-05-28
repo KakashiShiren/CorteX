@@ -45,7 +45,7 @@ export function MockMapPreview() {
           <div className="absolute inset-x-10 top-10 h-16 rounded-full border border-black/6 bg-white/52 px-5 py-4 shadow-[0_18px_36px_rgba(18,17,15,0.08)] dark:border-white/8 dark:bg-white/[0.05]">
             <div className="flex items-center gap-3 text-sm text-black/66 dark:text-white/68">
               <Compass className="h-4 w-4 text-cortex-garnet dark:text-cortex-gold" />
-              Search Higgins, library, gym...
+              Search buildings, library, gym...
             </div>
           </div>
 

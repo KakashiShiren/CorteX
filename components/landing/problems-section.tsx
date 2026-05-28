@@ -2,7 +2,7 @@ const items = [
   {
     title: "Navigation",
     problem: "New students lose time figuring out where to go next.",
-    solution: "Search a Clark building and get the route immediately."
+    solution: "Search a campus building and get the route immediately."
   },
   {
     title: "Connection",
@@ -12,14 +12,14 @@ const items = [
   {
     title: "Intelligence",
     problem: "Campus answers are scattered across pages, PDFs, and people.",
-    solution: "Ask one assistant that cites Clark-specific information."
+    solution: "Ask one assistant that cites campus-specific information."
   }
 ];
 
 export function ProblemsSection() {
   return (
     <section className="cortex-shell py-24">
-      <div className="eyebrow">Problems Cortex Solves</div>
+        <div className="eyebrow">Problems Grove Solves</div>
       <div className="mt-4 section-title">Three campus bottlenecks. One fast answer layer.</div>
       <div className="mt-12 grid gap-8 md:grid-cols-3">
         {items.map((item) => (

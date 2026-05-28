@@ -17,7 +17,7 @@ export function MessageItem({
         <div>{message.content}</div>
         <div className={`mt-2 text-xs ${isOwn ? "text-white/70" : "text-black/45 dark:text-white/45"}`}>
           {new Date(message.createdAt).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}
-          {isOwn && message.isRead ? " • Read" : ""}
+          {isOwn && message.isRead ? " | Read" : ""}
         </div>
       </div>
     </div>
